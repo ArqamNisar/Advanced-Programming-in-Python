@@ -11,9 +11,10 @@ from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QLineEdit,
     QMainWindow, QMenu, QMenuBar, QPlainTextEdit,
     QPushButton, QSizePolicy, QStackedWidget, QStatusBar,QTableWidget, QMessageBox,QTabWidget,
     QTableWidget, QTableWidgetItem, QWidget)
+
 from PySide6.QtUiTools import QUiLoader
 from ui_Home import Ui_MainWindow
-import mysql.connector
+import mysql.connector 
 
 database = mysql.connector.connect(host="192.168.100.132", user="arqam", password="Vk18arsh", db="electronicsinventory")
 curs = database.cursor()
@@ -450,7 +451,10 @@ class Ui_IMSLogin(object):
         ___qtablewidgetitem15.setText(QCoreApplication.translate("IMSLogin", u"12", None));
         ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("IMSLogin", u"13", None));
-
+        # ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(13)
+        # ___qtablewidgetitem17.setText(QCoreApplication.translate("IMSLogin", u"14", None));        
+        # ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(14)
+        # ___qtablewidgetitem18.setText(QCoreApplication.translate("IMSLogin", u"15", None));
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
         self.tableWidget.setSortingEnabled(__sortingEnabled)
@@ -459,8 +463,10 @@ class Ui_IMSLogin(object):
     # retranslateUi
 
     def hometab(self):
-            
-            if self.lineEdit.text() == "admin" and self.lineEdit_2.text() == "admin123":
+            curs.execute("select * from login")
+            result = curs.fetchall()
+
+            if self.lineEdit.text() == result[0][0] and self.lineEdit_2.text() == result[0][1]:
                 
                 self.stackedWidget.addWidget(self.page_3)
                 self.page_4 = QWidget()
@@ -546,7 +552,13 @@ class Ui_IMSLogin(object):
                 self.page_21.show()
         
 
+                
+                # for row_number, row_data in enumerate(result):
+                #         self.tableWidget.insertRow(row_number)
+                #         for column_number, data in enumerate(row_data):
+                #                 self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))        
     
+
     def addremprod(self):
                 self.stackedWidget.addWidget(self.page_22)
                 font = QFont()
@@ -615,7 +627,7 @@ class Ui_IMSLogin(object):
                 self.lineEdit_u.setStyleSheet(u"\n"
         "	background-color:#ffffff;\n"
         "")
-                self.pushButton_27 = QPushButton(self.AddRemoveForm,clicked=lambda:self.addtoinv(___qtablewidgetitem,___qtablewidgetitem1, ___qtablewidgetitem2, ___qtablewidgetitem3))
+                self.pushButton_27 = QPushButton(self.AddRemoveForm,clicked=lambda:self.addtoinv())
                 self.pushButton_27.setObjectName(u"pushButton_25")
                 self.pushButton_27.setGeometry(QRect(100, 260, 168, 31))
                 self.pushButton_27.setStyleSheet(u"\n"
@@ -706,12 +718,252 @@ class Ui_IMSLogin(object):
                 ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
                 ___qtablewidgetitem3.setText(QCoreApplication.translate("IMSLogin", u"Units", None));
 
+    def addtoinv(self):
+                
+                self.stackedWidget.addWidget(self.page_23)
+                self.page = QWidget()
+                self.page.setObjectName(u"page")
+                self.tableWidget = QTableWidget(self.page)
+                self.stackedWidget.addWidget(self.page_23)
+                self.page = QWidget()
+                self.page.setObjectName(u"page")
+                self.tableWidget = QTableWidget(self.page)
+                if (self.tableWidget.columnCount() < 4):
+                        self.tableWidget.setColumnCount(4)
+                        __qtablewidgetitem = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+                        __qtablewidgetitem1 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+                        __qtablewidgetitem2 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+                        __qtablewidgetitem3 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+                if (self.tableWidget.rowCount() < 20):
+                        self.tableWidget.setRowCount(13)
+                        __qtablewidgetitem4 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
+                        __qtablewidgetitem5 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
+                        __qtablewidgetitem6 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem6)
+                        __qtablewidgetitem7 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem7)
+                        __qtablewidgetitem8 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem8)
+                        __qtablewidgetitem9 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem9)
+                        __qtablewidgetitem10 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem10)
+                        __qtablewidgetitem11 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem11)
+                        __qtablewidgetitem12 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem12)
+                        __qtablewidgetitem13 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem13)
+                        __qtablewidgetitem14 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem14)
+                        __qtablewidgetitem15 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem15)
+                        __qtablewidgetitem16 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem16)
+                        __qtablewidgetitem17 = QTableWidgetItem()
+                        self.tableWidget.setItem(0, 0, __qtablewidgetitem17)
+                        __qtablewidgetitem18 = QTableWidgetItem()
+                        self.tableWidget.setItem(1, 0, __qtablewidgetitem18)
+                        __qtablewidgetitem19 = QTableWidgetItem()
+                        self.tableWidget.setItem(1, 1, __qtablewidgetitem19)
+                        __qtablewidgetitem20 = QTableWidgetItem()
+                        self.tableWidget.setItem(2, 0, __qtablewidgetitem20)
+                        self.tableWidget.setObjectName(u"tableWidget")
+                        self.tableWidget.setGeometry(QRect(60, 50, 451, 411))
+                        self.tableWidget.setStyleSheet(u"background-color: #C0C0C0;\n"
+                "alternate-background-color:#606060;\n"
+                "selection-background-color: #282828;")
+                self.page.show()        
+                ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+                ___qtablewidgetitem.setText(QCoreApplication.translate("IMSLogin", u"Product", None));
+                ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+                ___qtablewidgetitem1.setText(QCoreApplication.translate("IMSLogin", u"Category", None));
+                ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+                ___qtablewidgetitem2.setText(QCoreApplication.translate("IMSLogin", u"Price", None));
+                ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+                ___qtablewidgetitem3.setText(QCoreApplication.translate("IMSLogin", u"Units", None));
+                ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(0)
+                ___qtablewidgetitem4.setText(QCoreApplication.translate("IMSLogin", u"1", None));
+                ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(1)
+                ___qtablewidgetitem5.setText(QCoreApplication.translate("IMSLogin", u"2", None));
+                ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(2)
+                ___qtablewidgetitem6.setText(QCoreApplication.translate("IMSLogin", u"3", None));
+                ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(3)
+                ___qtablewidgetitem7.setText(QCoreApplication.translate("IMSLogin", u"4", None));
+                ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
+                ___qtablewidgetitem8.setText(QCoreApplication.translate("IMSLogin", u"5", None));
+                ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
+                ___qtablewidgetitem9.setText(QCoreApplication.translate("IMSLogin", u"6", None));
+                ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
+                ___qtablewidgetitem10.setText(QCoreApplication.translate("IMSLogin", u"7", None));
+                ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
+                ___qtablewidgetitem11.setText(QCoreApplication.translate("IMSLogin", u"8", None));
+                ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
+                ___qtablewidgetitem12.setText(QCoreApplication.translate("IMSLogin", u"9", None));
+                ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(9)
+                ___qtablewidgetitem13.setText(QCoreApplication.translate("IMSLogin", u"10", None));
+                ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(10)
+                ___qtablewidgetitem14.setText(QCoreApplication.translate("IMSLogin", u"11", None));
+                ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(11)
+                ___qtablewidgetitem15.setText(QCoreApplication.translate("IMSLogin", u"12", None));
+                ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
+                ___qtablewidgetitem16.setText(QCoreApplication.translate("IMSLogin", u"13", None));
+
+                __sortingEnabled = self.tableWidget.isSortingEnabled()
+                self.tableWidget.setSortingEnabled(False)
+                self.tableWidget.setSortingEnabled(__sortingEnabled)
+                self.tableWidget.setRowCount(0)
+                
+                curs.execute("insert into inventory(Product, Category, Price,Units) values(%s, %s, %s, %s)",(self.lineEdit_17.text(),self.lineEdit_16.text(),self.lineEdit_p.text(),self.lineEdit_u.text()))
+
+                curs.execute("select * from inventory")
+                result = curs.fetchall()                
+                database.commit() 
+                for row_number, row_data in enumerate(result):
+                        self.tableWidget.insertRow(row_number)
+                        for column_number, data in enumerate(row_data):
+                                self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))        
+                msg = QMessageBox()
+                msg.setText("Data entered successfully.")
+                msg.exec()
+                
+    def remfromInv(self):
+                
+                self.stackedWidget.addWidget(self.page_23)
+                self.page = QWidget()
+                self.page.setObjectName(u"page")
+                self.tableWidget = QTableWidget(self.page)
+                self.stackedWidget.addWidget(self.page_23)
+                self.page = QWidget()
+                self.page.setObjectName(u"page")
+                self.tableWidget = QTableWidget(self.page)
+                if (self.tableWidget.columnCount() < 4):
+                        self.tableWidget.setColumnCount(4)
+                        __qtablewidgetitem = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+                        __qtablewidgetitem1 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+                        __qtablewidgetitem2 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+                        __qtablewidgetitem3 = QTableWidgetItem()
+                        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+                if (self.tableWidget.rowCount() < 20):
+                        self.tableWidget.setRowCount(13)
+                        __qtablewidgetitem4 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
+                        __qtablewidgetitem5 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
+                        __qtablewidgetitem6 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem6)
+                        __qtablewidgetitem7 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem7)
+                        __qtablewidgetitem8 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem8)
+                        __qtablewidgetitem9 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem9)
+                        __qtablewidgetitem10 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem10)
+                        __qtablewidgetitem11 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem11)
+                        __qtablewidgetitem12 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem12)
+                        __qtablewidgetitem13 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem13)
+                        __qtablewidgetitem14 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem14)
+                        __qtablewidgetitem15 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem15)
+                        __qtablewidgetitem16 = QTableWidgetItem()
+                        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem16)
+                        __qtablewidgetitem17 = QTableWidgetItem()
+                        self.tableWidget.setItem(0, 0, __qtablewidgetitem17)
+                        __qtablewidgetitem18 = QTableWidgetItem()
+                        self.tableWidget.setItem(1, 0, __qtablewidgetitem18)
+                        __qtablewidgetitem19 = QTableWidgetItem()
+                        self.tableWidget.setItem(1, 1, __qtablewidgetitem19)
+                        __qtablewidgetitem20 = QTableWidgetItem()
+                        self.tableWidget.setItem(2, 0, __qtablewidgetitem20)
+                        self.tableWidget.setObjectName(u"tableWidget")
+                        self.tableWidget.setGeometry(QRect(60, 50, 451, 411))
+                        self.tableWidget.setStyleSheet(u"background-color: #C0C0C0;\n"
+                "alternate-background-color:#606060;\n"
+                "selection-background-color: #282828;")
+                self.page.show()        
+                ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+                ___qtablewidgetitem.setText(QCoreApplication.translate("IMSLogin", u"Product", None));
+                ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+                ___qtablewidgetitem1.setText(QCoreApplication.translate("IMSLogin", u"Category", None));
+                ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+                ___qtablewidgetitem2.setText(QCoreApplication.translate("IMSLogin", u"Price", None));
+                ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+                ___qtablewidgetitem3.setText(QCoreApplication.translate("IMSLogin", u"Units", None));
+                ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(0)
+                ___qtablewidgetitem4.setText(QCoreApplication.translate("IMSLogin", u"1", None));
+                ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(1)
+                ___qtablewidgetitem5.setText(QCoreApplication.translate("IMSLogin", u"2", None));
+                ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(2)
+                ___qtablewidgetitem6.setText(QCoreApplication.translate("IMSLogin", u"3", None));
+                ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(3)
+                ___qtablewidgetitem7.setText(QCoreApplication.translate("IMSLogin", u"4", None));
+                ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
+                ___qtablewidgetitem8.setText(QCoreApplication.translate("IMSLogin", u"5", None));
+                ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
+                ___qtablewidgetitem9.setText(QCoreApplication.translate("IMSLogin", u"6", None));
+                ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
+                ___qtablewidgetitem10.setText(QCoreApplication.translate("IMSLogin", u"7", None));
+                ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
+                ___qtablewidgetitem11.setText(QCoreApplication.translate("IMSLogin", u"8", None));
+                ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
+                ___qtablewidgetitem12.setText(QCoreApplication.translate("IMSLogin", u"9", None));
+                ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(9)
+                ___qtablewidgetitem13.setText(QCoreApplication.translate("IMSLogin", u"10", None));
+                ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(10)
+                ___qtablewidgetitem14.setText(QCoreApplication.translate("IMSLogin", u"11", None));
+                ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(11)
+                ___qtablewidgetitem15.setText(QCoreApplication.translate("IMSLogin", u"12", None));
+                ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
+                ___qtablewidgetitem16.setText(QCoreApplication.translate("IMSLogin", u"13", None));
+
+                __sortingEnabled = self.tableWidget.isSortingEnabled()
+                self.tableWidget.setSortingEnabled(False)
+                self.tableWidget.setSortingEnabled(__sortingEnabled)
+                self.tableWidget.setRowCount(0)
+                
+                curs.execute("delete from inventory where Product=%s and Category = %s and Price = %s and Units = %s limit 1",(self.lineEdit_17.text(),self.lineEdit_16.text(),self.lineEdit_p.text(),self.lineEdit_u.text()))
+                print("Data deleted...")
+                
+                
+                curs.execute("select * from inventory")
+                result = curs.fetchall()                
+                database.commit()
+                for row_number, row_data in enumerate(result):
+                        self.tableWidget.insertRow(row_number)
+                        for column_number, data in enumerate(row_data):
+                                self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))        
+
+                msg = QMessageBox()
+                msg.setText("Data deleted successfully.")
+                msg.exec() 
+                
+                
     def Setnewpass(self):
                 if self.lineEdit_5.text() == self.lineEdit_6.text():
+                        curs.execute("update login set passw = %s",(self.lineEdit_5.text(),))
+                        database.commit()
+                        
                         self.page_21.hide()
-                        # MainWindow.show()
-                        self.a = self.lineEdit_6.text() 
-                        self.b = self.lineEdit_2.text()
+                        MainWindow.hide()
+                        msg = QMessageBox()
+                        msg.setText("Please login again to use the app.")
+                        msg.exec()                               
+
+                        
                                                         
                 else:
                         msg = QMessageBox()
@@ -1264,116 +1516,6 @@ class Ui_IMSLogin(object):
                         for column_number, data in enumerate(row_data):
                                 self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))        
      
-    def addtoinv(self,prod,cat,pr,un):
-                self.stackedWidget.addWidget(self.page_23)
-                self.page = QWidget()
-                self.page.setObjectName(u"page")
-                self.tableWidget = QTableWidget(self.page)
-                self.stackedWidget.addWidget(self.page_23)
-                self.page = QWidget()
-                self.page.setObjectName(u"page")
-                self.tableWidget = QTableWidget(self.page)
-                if (self.tableWidget.columnCount() < 4):
-                        self.tableWidget.setColumnCount(4)
-                        __qtablewidgetitem = QTableWidgetItem()
-                        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
-                        __qtablewidgetitem1 = QTableWidgetItem()
-                        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-                        __qtablewidgetitem2 = QTableWidgetItem()
-                        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-                        __qtablewidgetitem3 = QTableWidgetItem()
-                        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-                if (self.tableWidget.rowCount() < 13):
-                        self.tableWidget.setRowCount(13)
-                        __qtablewidgetitem4 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
-                        __qtablewidgetitem5 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
-                        __qtablewidgetitem6 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem6)
-                        __qtablewidgetitem7 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem7)
-                        __qtablewidgetitem8 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem8)
-                        __qtablewidgetitem9 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem9)
-                        __qtablewidgetitem10 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem10)
-                        __qtablewidgetitem11 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem11)
-                        __qtablewidgetitem12 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem12)
-                        __qtablewidgetitem13 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem13)
-                        __qtablewidgetitem14 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem14)
-                        __qtablewidgetitem15 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem15)
-                        __qtablewidgetitem16 = QTableWidgetItem()
-                        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem16)
-                        __qtablewidgetitem17 = QTableWidgetItem()
-                        self.tableWidget.setItem(0, 0, __qtablewidgetitem17)
-                        __qtablewidgetitem18 = QTableWidgetItem()
-                        self.tableWidget.setItem(1, 0, __qtablewidgetitem18)
-                        __qtablewidgetitem19 = QTableWidgetItem()
-                        self.tableWidget.setItem(1, 1, __qtablewidgetitem19)
-                        __qtablewidgetitem20 = QTableWidgetItem()
-                        self.tableWidget.setItem(2, 0, __qtablewidgetitem20)
-                        self.tableWidget.setObjectName(u"tableWidget")
-                        self.tableWidget.setGeometry(QRect(60, 50, 451, 411))
-                        self.tableWidget.setStyleSheet(u"background-color: #C0C0C0;\n"
-                "alternate-background-color:#606060;\n"
-                "selection-background-color: #282828;")
-                self.page.show()        
-                ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-                ___qtablewidgetitem.setText(QCoreApplication.translate("IMSLogin", u"Product", None));
-                ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-                ___qtablewidgetitem1.setText(QCoreApplication.translate("IMSLogin", u"Category", None));
-                ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-                ___qtablewidgetitem2.setText(QCoreApplication.translate("IMSLogin", u"Price", None));
-                ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-                ___qtablewidgetitem3.setText(QCoreApplication.translate("IMSLogin", u"Units", None));
-                ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(0)
-                ___qtablewidgetitem4.setText(QCoreApplication.translate("IMSLogin", u"1", None));
-                ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(1)
-                ___qtablewidgetitem5.setText(QCoreApplication.translate("IMSLogin", u"2", None));
-                ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(2)
-                ___qtablewidgetitem6.setText(QCoreApplication.translate("IMSLogin", u"3", None));
-                ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(3)
-                ___qtablewidgetitem7.setText(QCoreApplication.translate("IMSLogin", u"4", None));
-                ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
-                ___qtablewidgetitem8.setText(QCoreApplication.translate("IMSLogin", u"5", None));
-                ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
-                ___qtablewidgetitem9.setText(QCoreApplication.translate("IMSLogin", u"6", None));
-                ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
-                ___qtablewidgetitem10.setText(QCoreApplication.translate("IMSLogin", u"7", None));
-                ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
-                ___qtablewidgetitem11.setText(QCoreApplication.translate("IMSLogin", u"8", None));
-                ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
-                ___qtablewidgetitem12.setText(QCoreApplication.translate("IMSLogin", u"9", None));
-                ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(9)
-                ___qtablewidgetitem13.setText(QCoreApplication.translate("IMSLogin", u"10", None));
-                ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(10)
-                ___qtablewidgetitem14.setText(QCoreApplication.translate("IMSLogin", u"11", None));
-                ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(11)
-                ___qtablewidgetitem15.setText(QCoreApplication.translate("IMSLogin", u"12", None));
-                ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
-                ___qtablewidgetitem16.setText(QCoreApplication.translate("IMSLogin", u"13", None));
-
-                __sortingEnabled = self.tableWidget.isSortingEnabled()
-                self.tableWidget.setSortingEnabled(False)
-                self.tableWidget.setSortingEnabled(__sortingEnabled)
-                self.tableWidget.setRowCount(30)
-                
-                curs.execute("insert into inventory (Product,Category,Price,Units) values (%s,%s,%s,%s)",(prod, cat, (pr, ), (un, )))
-                print("Data entered...")
-                database.commit()
-                result = curs.fetchall()
-                
-                for row_number, row_data in enumerate(result):
-                        self.tableWidget.insertRow(row_number)
-                        for column_number, data in enumerate(row_data):
-                                self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))        
          
 import sys
 app = QApplication(sys.argv) 
